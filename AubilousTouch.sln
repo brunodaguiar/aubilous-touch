@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AubilousTouch.Api", "AubilousTouch.Api\AubilousTouch.Api.csproj", "{D2DAA397-C2E9-40FF-8442-4A663BB88500}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AubilousTouch.Intra", "AubilousTouch.Intra\AubilousTouch.Intra.csproj", "{698260F9-B6EF-4E02-96D0-68C379A7BFFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AubilousTouch.Core", "AubilousTouch.Core\AubilousTouch.Core.csproj", "{8D8CB8D8-B213-439B-BF5B-7D4AD241EF9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AubilousTouch.App", "AubilousTouch.App\AubilousTouch.App.csproj", "{C56F4474-3B01-4462-BBD0-844DB20CD5F9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D2DAA397-C2E9-40FF-8442-4A663BB88500}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2DAA397-C2E9-40FF-8442-4A663BB88500}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2DAA397-C2E9-40FF-8442-4A663BB88500}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2DAA397-C2E9-40FF-8442-4A663BB88500}.Release|Any CPU.Build.0 = Release|Any CPU
+		{698260F9-B6EF-4E02-96D0-68C379A7BFFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{698260F9-B6EF-4E02-96D0-68C379A7BFFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{698260F9-B6EF-4E02-96D0-68C379A7BFFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{698260F9-B6EF-4E02-96D0-68C379A7BFFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D8CB8D8-B213-439B-BF5B-7D4AD241EF9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D8CB8D8-B213-439B-BF5B-7D4AD241EF9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D8CB8D8-B213-439B-BF5B-7D4AD241EF9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D8CB8D8-B213-439B-BF5B-7D4AD241EF9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C56F4474-3B01-4462-BBD0-844DB20CD5F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C56F4474-3B01-4462-BBD0-844DB20CD5F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C56F4474-3B01-4462-BBD0-844DB20CD5F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C56F4474-3B01-4462-BBD0-844DB20CD5F9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {87E2361D-980E-4B56-A5E8-5978B6B46263}
+	EndGlobalSection
+EndGlobal
