@@ -9,9 +9,14 @@ namespace AubilousTouch.App.Services
     {
         IFileReader reader;
 
-        public IList<Contact> ReadFromFile(byte[] file)
+        public ContactService(IFileReader reader)
         {
-            throw new System.NotImplementedException();
+            this.reader = reader;
+        }
+
+        public IEnumerable<Contact> ReadFromFile(byte[] file)
+        {
+            return reader.Read(file);
         }
     }
 }

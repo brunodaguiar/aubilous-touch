@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AubilousTouch.App\AubilousTouch.App.csproj" />
     <ProjectReference Include="..\AubilousTouch.Core\AubilousTouch.Core.csproj" />
+    <ProjectReference Include="..\AubilousTouch.Intra\AubilousTouch.Intra.csproj" />
   </ItemGroup>
 
 

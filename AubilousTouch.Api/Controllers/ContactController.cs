@@ -16,10 +16,10 @@ namespace AubilousTouch.Api.Controllers
             this.service = service;
         }
 
-        [HttpGet]
-        [Produces(typeof(IList<Contact>))]
-        public IActionResult ReadFromFile(byte[] file)
-        {
+        [HttpPost]
+        [Produces(typeof(IEnumerable<Contact>))]
+        public IActionResult ReadFromFile([FromBody] byte[] file)
+        {            
             var contacts = service.ReadFromFile(file);
             
             return Ok(contacts);

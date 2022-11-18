@@ -1,6 +1,7 @@
 using AubilousTouch.App.Services;
 using AubilousTouch.Core.Interfaces;
 using AubilousTouch.Core.Interfaces.Services;
+using AubilousTouch.Intra.Readers.CSVHelper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -35,6 +36,8 @@ namespace AubilousTouch.Api
             });
 
             services.AddScoped<IContactService, ContactService>();
+            
+            services.AddScoped<IFileReader, CSVHelperReader>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
