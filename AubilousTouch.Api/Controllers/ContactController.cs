@@ -9,7 +9,7 @@ namespace AubilousTouch.Api.Controllers
     [Route("[controller]")]
     public class ContactController : ControllerBase
     {
-        readonly IContactService service;
+        private readonly IContactService service;
 
         public ContactController(IContactService service)
         {

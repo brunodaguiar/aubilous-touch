@@ -1,6 +1,8 @@
 using AubilousTouch.App.Services;
 using AubilousTouch.Core.Interfaces;
 using AubilousTouch.Core.Interfaces.Services;
+using AubilousTouch.Intra.Consumers;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -32,6 +34,16 @@ namespace AubilousTouch.Api
                     Title = "Implement Swagger UI",
                     Description = "A simple example to Implement Swagger UI",
                 });
+            });
+
+            services.AddMassTransit(x =>
+            {
+                x.AddConsumer<ExampleConsumer>();
+                x.UsingRabbitMq((context, cfg) =>
+                {
+                    cfg.ConfigureEndpoints(context);
+                });
+
             });
 
             services.AddScoped<IContactService, ContactService>();
