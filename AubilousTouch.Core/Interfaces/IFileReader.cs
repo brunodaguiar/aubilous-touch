@@ -1,10 +1,11 @@
 ﻿using AubilousTouch.Core.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AubilousTouch.Core.Interfaces
 {
     public interface IFileReader
     {
-        IEnumerable<Contact> Read(byte[] file);
+        IList<Employee> Read(byte[] file);
     }
 }
