@@ -22,41 +22,41 @@ namespace AubilousTouch.Intra.Repositories.Base
             DbSet = db.Set<TEntity>();
         }
 
-        public async Task<IEnumerable<TEntity>> Find(Expression<Func<TEntity, bool>> predicate)
+        public async Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate)
         {
             return await DbSet.AsNoTracking().Where(predicate).ToListAsync();
         }
 
-        public virtual async Task<TEntity> GetById(int Id)
+        public virtual async Task<TEntity> GetByIdAsync(int Id)
         {
             return await DbSet.FindAsync(Id);
         }
 
-        public virtual async Task<IEnumerable<TEntity>> GetAll()
+        public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
         {
             return await DbSet.ToListAsync();
         }
 
-        public virtual async Task Add(TEntity entity)
+        public virtual async Task AddAsync(TEntity entity)
         {
             DbSet.Add(entity);
-            await SaveChanges();
+            await SaveChangesAsync();
         }
 
-        public virtual async Task Update(TEntity entity)
+        public virtual async Task UpdateAsync(TEntity entity)
         {
             DbSet.Update(entity);
-            await SaveChanges();
+            await SaveChangesAsync();
         }
 
-        public virtual async Task Delete(int Id)
+        public virtual async Task DeleteAsync(int Id)
         {
             DbSet.Remove(new TEntity { Id = Id });
-            await SaveChanges();
+            await SaveChangesAsync();
 
         }
 
-        public async Task<int> SaveChanges()
+        public async Task<int> SaveChangesAsync()
         {
             return await Db.SaveChangesAsync();
         }

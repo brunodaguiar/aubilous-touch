@@ -6,8 +6,6 @@ using AubilousTouch.Intra.Consumers.Messages;
 using MassTransit;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AubilousTouch.App.Services
 {
