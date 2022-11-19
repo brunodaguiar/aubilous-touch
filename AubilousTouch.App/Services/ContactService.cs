@@ -24,16 +24,16 @@ namespace AubilousTouch.App.Services
             await _bus.Publish(new ExampleMessage());
         }
 
-        public ContactService(IFileReader reader)
+        public EmployeeService(IFileReader reader)
         {
             this._reader = reader;
         }
 
-        public IList<Contact> ReadFromFile(byte[] file)
+        public IList<Employee> ReadFromFile(byte[] file)
         {
-            IList<Contact> contacts = _reader.Read(file);
-            
-            return contacts;
+            IList<Employee> employees = _reader.Read(file);
+
+            return employees;
         }
     }
 }
