@@ -37,6 +37,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Employee](
 	[id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](150) NOT NULL,
 	[aubayid] [varchar](50) NULL,
 	[address] [varchar](50) NULL,
 	[role] [varchar](50) NULL,
