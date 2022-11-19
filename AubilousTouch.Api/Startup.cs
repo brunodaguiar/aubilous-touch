@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using AubilousTouch.Core.Interfaces.Repositories;
 using AubilousTouch.Intra.Repositories;
+using AubilousTouch.Intra.Senders;
 
 namespace AubilousTouch.Api
 {
@@ -52,8 +53,10 @@ namespace AubilousTouch.Api
                         
             //Dependency Injection
             services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IFileReader, CSVHelperReader>();
+            services.AddScoped<IMessageSender, EmailSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

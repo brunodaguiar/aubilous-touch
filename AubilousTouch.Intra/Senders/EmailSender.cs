@@ -2,13 +2,14 @@
 using AubilousTouch.Core.Models;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using System;
 using System.Threading.Tasks;
 
 namespace AubilousTouch.Intra.Senders
 {
     public class EmailSender : IMessageSender
     {
-        public Task<string> FormatText(Message message)
+        private Task<string> FormatText(Message message)
         {
             throw new System.NotImplementedException();
         }
@@ -25,7 +26,14 @@ namespace AubilousTouch.Intra.Senders
             var htmlContent = "<strong>Tudo que é bom dura pouco e a partir deste momento, você não faz parte do nosso quadro</strong>";
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
             
-            var response = await client.SendEmailAsync(msg);
+            try
+            {
+                var response = await client.SendEmailAsync(msg);
+            }
+            catch(Exception ex)
+            { 
+                //TODO: Log ou Retorno
+            }
         }
     }
 }
