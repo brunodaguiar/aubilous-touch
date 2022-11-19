@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using AubilousTouch.Core.Interfaces.Repositories;
+using AubilousTouch.Intra.Repositories;
 
 namespace AubilousTouch.Api
 {
@@ -50,6 +52,7 @@ namespace AubilousTouch.Api
                         
             //Dependency Injection
             services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IFileReader, CSVHelperReader>();
         }
 
