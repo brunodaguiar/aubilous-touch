@@ -20,7 +20,9 @@ namespace AubilousTouch.Intra.Context
         public DbSet<MessagesChannelPerEmployee> MessagesChannelPerEmployee { get; set; }
         public DbSet<MessagesGroup> MessagesGroup { get; set; }
         public DbSet<MessagesGroupPerEmployee> MessagesGroupPerEmployee { get; set; }
-
+        public DbSet<MessageCenter> MessageCenter { get; set; }
+        public DbSet<Message> Message { get; set; }
+ 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //TODO: Conforme necessário

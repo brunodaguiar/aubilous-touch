@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace AubilousTouch.Intra.Consumers.Messages
 {
     public class EmailWorkerMessage
     {
-        public List<int> MessageCenterId { get; set; }
+        public List<int> MessageCenterIds { get; set; }
     }
 }

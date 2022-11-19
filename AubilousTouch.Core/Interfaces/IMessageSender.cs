@@ -5,6 +5,6 @@ namespace AubilousTouch.Core.Interfaces
 {
     public interface IMessageSender
     {
-        Task SendMessage(ChannelEmployeeMessage channelEmployeeMesssage);        
+        Task<int> SendMessage(ChannelEmployeeMessage channelEmployeeMesssage);        
     }
 }
