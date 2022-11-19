@@ -16,9 +16,9 @@ namespace AubilousTouch.Api.Controllers
         }
 
         [HttpPost]
-        public void SendMessage([FromBody] Message message)
+        public void SendMessage([FromBody] ChannelEmployeeMessage channelEmployeeMesssage)
         {
-            _service.SendMessage(message);
+            _service.SendMessage(channelEmployeeMesssage);
         }
     }
 }

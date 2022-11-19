@@ -13,9 +13,9 @@ namespace AubilousTouch.App.Services
             _sender = sender;
         }
 
-        public void SendMessage(Message message)
+        public void SendMessage(ChannelEmployeeMessage channelEmployeeMesssage)
         {
-            _sender.SendMessage(message);
+            _sender.SendMessage(channelEmployeeMesssage);
         }
     }
 }
