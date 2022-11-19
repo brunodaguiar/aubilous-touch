@@ -11,7 +11,7 @@ namespace AubilousTouch.Intra.Senders
     {
         public async Task SendMessage(ChannelEmployeeMessage channelEmployeeMesssage)
         {
-            var apiKey = Environment.GetEnvironmentVariable("SENDGRID_GRUPOROXO_API_KEY");
+            var apiKey = Environment.GetEnvironmentVariable("SENDGRID_GRUPOROXO_API_KEY") ?? string.Empty;
             var client = new SendGridClient(apiKey);                        
 
             var subject = channelEmployeeMesssage.Message.Subject;
