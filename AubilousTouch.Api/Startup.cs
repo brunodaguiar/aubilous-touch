@@ -62,7 +62,7 @@ namespace AubilousTouch.Api
             services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IFileReader, CSVHelperReader>();
-            services.AddScoped<IMessageSender, TelegramSender>();
+            services.AddScoped<IMessageSender, SMSSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
