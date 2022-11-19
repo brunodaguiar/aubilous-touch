@@ -9,21 +9,21 @@ namespace AubilousTouch.Intra.Senders
 {
     public class EmailSender : IMessageSender
     {
-        private Task<string> FormatText(Message message)
+        public async Task SendMessage(ChannelEmployeeMessage channelEmployeeMesssage)
         {
-            throw new System.NotImplementedException();
-        }
+            var apiKey = Environment.GetEnvironmentVariable("SENDGRID_GRUPOROXO_API_KEY");
+            var client = new SendGridClient(apiKey);                        
 
-        public async Task SendMessage(Message message)
-        {                        
-            var client = new SendGridClient("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");
-            var from = new EmailAddress("gruporoxohackathon@gmail.com", "Hackathon Grupo Roxo");
-            var subject = "Aubilous - Está na hora de procurar um emprego! Você está demitido :D";
-            //var subject = message.Title;
-            var to = new EmailAddress("brunoaguiardev@gmail.com", "Bruno Aguiar");
-            //var subject = message.Title;
-            var plainTextContent = "Tudo que é bom dura pouco e a partir deste momento, você não faz parte do nosso quadro";
-            var htmlContent = "<strong>Tudo que é bom dura pouco e a partir deste momento, você não faz parte do nosso quadro</strong>";
+            var subject = channelEmployeeMesssage.Message.Subject;
+            
+            var from = new EmailAddress("gruporoxohackathon@gmail.com", "Hackathon Grupo Roxo");            
+            var to = new EmailAddress(channelEmployeeMesssage.MessagesChannelPerEmployee.ContactTag);
+            
+            var body = channelEmployeeMesssage.Message.Body;
+
+            var plainTextContent = body;
+            var htmlContent = $"<strong>{body}</strong>";
+
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
             
             try
