@@ -31,6 +31,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "AubilousTouch.Portal", "Aub
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "58292"
+		SlnRelativePath = "AubilousTouch.Portal\"
 	EndProjectSection
 EndProject
 Global
