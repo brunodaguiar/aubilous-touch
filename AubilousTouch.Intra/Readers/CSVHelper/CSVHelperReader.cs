@@ -3,12 +3,13 @@ using AubilousTouch.Core.Models;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 
 namespace AubilousTouch.Intra.Readers.CSVHelper
 {
     public class CSVHelperReader : IFileReader
     {
-        public IEnumerable<Contact> Read(byte[] file)
+        public IList<Contact> Read(byte[] file)
         {
             using (Stream stream = new MemoryStream(file))
             {
@@ -20,7 +21,7 @@ namespace AubilousTouch.Intra.Readers.CSVHelper
 
                         var records = csvReader.GetRecords<Contact>();
 
-                        return records;
+                        return records.ToList();
                     }
                 }
             }

@@ -1,7 +1,11 @@
 ﻿using AubilousTouch.Core.Interfaces.Services;
 using AubilousTouch.Core.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
 
 namespace AubilousTouch.Api.Controllers
 {
@@ -17,10 +21,19 @@ namespace AubilousTouch.Api.Controllers
         }
 
         [HttpPost]
-        [Produces(typeof(IEnumerable<Contact>))]
-        public IActionResult ReadFromFile([FromBody] byte[] file)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Contact>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        public IActionResult ReadFromFile(IFormFile file)
         {            
-            var contacts = service.ReadFromFile(file);
+            if (file == null || file.Length == 0) return BadRequest();
+
+            IList<Contact> contacts;
+            using (var memoryStream = new MemoryStream())
+            {
+                file.CopyTo(memoryStream);
+
+                contacts = service.ReadFromFile(memoryStream.ToArray());
+            }                
             
             return Ok(contacts);
         }

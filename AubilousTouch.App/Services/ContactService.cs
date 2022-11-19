@@ -2,6 +2,7 @@
 using AubilousTouch.Core.Interfaces.Services;
 using AubilousTouch.Core.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AubilousTouch.App.Services
 {
@@ -14,9 +15,11 @@ namespace AubilousTouch.App.Services
             this.reader = reader;
         }
 
-        public IEnumerable<Contact> ReadFromFile(byte[] file)
+        public IList<Contact> ReadFromFile(byte[] file)
         {
-            return reader.Read(file);
+            IList<Contact> contacts = reader.Read(file);
+            
+            return contacts;
         }
     }
 }

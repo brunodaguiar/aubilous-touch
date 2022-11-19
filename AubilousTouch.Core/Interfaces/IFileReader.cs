@@ -5,6 +5,6 @@ namespace AubilousTouch.Core.Interfaces
 {
     public interface IFileReader
     {
-        IEnumerable<Contact> Read(byte[] file);
+        IList<Contact> Read(byte[] file);
     }
 }
