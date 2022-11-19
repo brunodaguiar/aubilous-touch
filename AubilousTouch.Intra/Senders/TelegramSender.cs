@@ -13,6 +13,7 @@ namespace AubilousTouch.Intra.Senders
     {
         public async Task SendMessage(ChannelEmployeeMessage channelEmployeeMesssage)
         {
+            //As chaves serão mantidas em variáveis de ambiente para manter coesão
             var apiKey = Environment.GetEnvironmentVariable("TELEGRAM_GRUPOROXO_API_KEY") ?? string.Empty;
             var client = new TelegramBotClient(apiKey);
 
