@@ -15,9 +15,9 @@ namespace AubilousTouch.Intra.Context
 
         }
 
-        public DbSet<Employee> Employees { get; set; }
-        public DbSet<MessagesChannel> MessagesChannels { get; set; }
-        public DbSet<MessagesChannelPerEmployee> MessagesChannelPerEmployees { get; set; }
+        public DbSet<Employee> Employee { get; set; }
+        public DbSet<MessagesChannel> MessagesChannel { get; set; }
+        public DbSet<MessagesChannelPerEmployee> MessagesChannelPerEmployee { get; set; }
         public DbSet<MessagesGroup> MessagesGroup { get; set; }
         public DbSet<MessagesGroupPerEmployee> MessagesGroupPerEmployee { get; set; }
 

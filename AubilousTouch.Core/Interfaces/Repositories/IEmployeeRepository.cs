@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AubilousTouch.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace AubilousTouch.Core.Interfaces.Repositories
 {
-    public interface IEmployeeRepository
+    public interface IEmployeeRepository : IRepository<Employee>, IDisposable
     {
-
+        
+        //Custom implementations for EmployeeRepo go here.
     }
 }

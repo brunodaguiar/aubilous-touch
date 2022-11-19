@@ -10,14 +10,14 @@ namespace AubilousTouch.Core.Interfaces.Repositories
 {
     public interface IRepository<TEntity> : IDisposable where TEntity : EntityBase
     {
-        Task Add(TEntity entity);
-        Task<TEntity> GetById(int Id);
-        Task<IEnumerable<TEntity>> GetAll();
-        Task Update(TEntity entity);
-        Task Delete(int Id);
+        Task AddAsync(TEntity entity);
+        Task<TEntity> GetByIdAsync(int Id);
+        Task<IEnumerable<TEntity>> GetAllAsync();
+        Task UpdateAsync(TEntity entity);
+        Task DeleteAsync(int Id);
 
-        Task<IEnumerable<TEntity>> Find(Expression<Func<TEntity, bool>> predicate);
-        Task<int> SaveChanges();
+        Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<int> SaveChangesAsync();
         int DeleteMany(Expression<Func<TEntity, bool>> predicate);
     }
 }

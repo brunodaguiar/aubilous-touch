@@ -4,9 +4,8 @@ namespace AubilousTouch.Core.Models
 {
     public class Employee : EntityBase
     {
-        public int EmployeeId { get; set; }
         public string AubayId { get; set; }
-        public string Addres { get; set; }
+        public string Address { get; set; }
         public string Role { get; set; }
         public string MobilePhone { get; set; }
         public DateTime? BirthDate { get; set; }

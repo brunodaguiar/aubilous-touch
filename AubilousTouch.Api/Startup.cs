@@ -11,6 +11,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using AubilousTouch.Intra.Context;
+using Microsoft.EntityFrameworkCore;
+using AubilousTouch.Intra.Repositories;
+using AubilousTouch.Core.Interfaces.Repositories;
 
 namespace AubilousTouch.Api
 {
@@ -24,7 +28,7 @@ namespace AubilousTouch.Api
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddControllers();
             services.AddSwaggerGen();
@@ -46,10 +50,15 @@ namespace AubilousTouch.Api
                     cfg.ConfigureEndpoints(context);
                 });
 
-            });            
-                        
+            });
+
+            services.AddDbContext<AubilousTouchDbContext>(options =>
+                options.UseSqlServer(
+                    configuration.GetConnectionString("DefaultConnection")));
+
             //Dependency Injection
             services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IFileReader, CSVHelperReader>();
         }
 
