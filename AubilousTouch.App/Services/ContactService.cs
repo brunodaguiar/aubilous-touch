@@ -23,7 +23,7 @@ namespace AubilousTouch.App.Services
             await _bus.Publish(new ExampleMessage());
         }
 
-        public IList<Contact> ReadFromFile(byte[] file)
+        public IList<Employee> ReadFromFile(byte[] file)
         {
             throw new System.NotImplementedException();
         }
