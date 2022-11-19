@@ -9,15 +9,15 @@ namespace AubilousTouch.Api.Controllers
     [Route("[controller]")]
     public class ContactController : ControllerBase
     {
-        private readonly IContactService service;
+        readonly IEmployeeService service;
 
-        public ContactController(IContactService service)
+        public ContactController(IEmployeeService service)
         {
             this.service = service;
         }
 
         [HttpGet]
-        [Produces(typeof(IList<Contact>))]
+        [Produces(typeof(IList<Employee>))]
         public IActionResult ReadFromFile(byte[] file)
         {
             var contacts = service.ReadFromFile(file);
