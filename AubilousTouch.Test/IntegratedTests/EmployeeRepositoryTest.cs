@@ -1,13 +1,10 @@
 ﻿using AubilousTouch.Core.Interfaces.Repositories;
+using AubilousTouch.Core.Models;
 using AubilousTouch.Intra.Context;
 using AubilousTouch.Intra.Repositories;
-using AubilousTouch.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace AubilousTouch.Test.IntegratedTests
@@ -49,7 +46,6 @@ namespace AubilousTouch.Test.IntegratedTests
 
             //Act Assert
             Assert.DoesNotThrowAsync(async () => await _repository.AddAsync(Employee));
-
         }
 
 
