@@ -1,8 +1,11 @@
 ﻿using AubilousTouch.Core.Interfaces;
 using AubilousTouch.Core.Models;
+using SendGrid.Helpers.Mail;
+using SendGrid;
 using System;
 using System.Threading.Tasks;
 using Telegram.Bot;
+using Telegram.Bot.Types;
 
 namespace AubilousTouch.Intra.Senders
 {
@@ -10,11 +13,25 @@ namespace AubilousTouch.Intra.Senders
     {
         public async Task SendMessage(ChannelEmployeeMessage channelEmployeeMesssage)
         {
-            var apiKey = "22855303";
-            
-            var bot = new TelegramBotClient(apiKey);
+            var apiKey = Environment.GetEnvironmentVariable("TELEGRAM_GRUPOROXO_API_KEY") ?? string.Empty;
+            var client = new TelegramBotClient(apiKey);
 
-            var result = bot.SendTextMessageAsync(869805046, "Aubilous - Está na hora de procurar um emprego! Você está demitido :D");
+            var subject = channelEmployeeMesssage.Message.Subject;
+
+            var to = new ChatId(channelEmployeeMesssage.MessagesChannelPerEmployee.ContactTag);
+
+            var body = channelEmployeeMesssage.Message.Body;
+
+            var text = $"{subject}\n\n{body}";
+
+            try
+            {
+                var result = await client.SendTextMessageAsync(to, text);
+            }
+            catch (Exception ex)
+            {
+                //TODO: Log ou Retorno
+            }
         }
     }
 }
