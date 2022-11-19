@@ -32,8 +32,8 @@ namespace AubilousTouch.Intra.Senders
                 var response = await client.SendEmailAsync(msg);
             }
             catch(Exception ex)
-            { 
-                //TODO: Log ou Retorno
+            {
+                throw ex;
             }
         }
     }
