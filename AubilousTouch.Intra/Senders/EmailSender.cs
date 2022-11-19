@@ -11,6 +11,7 @@ namespace AubilousTouch.Intra.Senders
     {
         public async Task SendMessage(ChannelEmployeeMessage channelEmployeeMesssage)
         {
+            //AVISO, ESTA CHAVE NÃO PODE ESTAR NO NOSSO APP CONFIG POIS A SENDGRID MONITORA ISSO EM TODOS OS GIT PUBLICOS
             var apiKey = Environment.GetEnvironmentVariable("SENDGRID_GRUPOROXO_API_KEY") ?? string.Empty;
             var client = new SendGridClient(apiKey);                        
 
