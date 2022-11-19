@@ -3,18 +3,17 @@ using AubilousTouch.Core.Interfaces;
 using AubilousTouch.Core.Interfaces.Repositories;
 using AubilousTouch.Core.Interfaces.Services;
 using AubilousTouch.Intra.Consumers;
+using AubilousTouch.Intra.Context;
 using AubilousTouch.Intra.Readers.CSVHelper;
 using AubilousTouch.Intra.Repositories;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using AubilousTouch.Core.Interfaces.Repositories;
-using AubilousTouch.Intra.Repositories;
-using AubilousTouch.Intra.Senders;
 
 namespace AubilousTouch.Api
 {
@@ -50,14 +49,17 @@ namespace AubilousTouch.Api
                     cfg.ConfigureEndpoints(context);
                 });
 
-            });            
-                        
+            });
+
+
+            services.AddDbContext<AubilousTouchDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
+
             //Dependency Injection
             services.AddScoped<IEmployeeService, EmployeeService>();
-            services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IFileReader, CSVHelperReader>();
-            services.AddScoped<IMessageSender, EmailSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
