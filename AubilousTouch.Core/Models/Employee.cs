@@ -2,7 +2,7 @@
 
 namespace AubilousTouch.Core.Models
 {
-    public class Employee
+    public class Employee : EntityBase
     {
         public int EmployeeId { get; set; }
         public string AubayId { get; set; }
