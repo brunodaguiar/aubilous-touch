@@ -5,6 +5,7 @@ using AubilousTouch.Intra.Consumers.Messages;
 using MassTransit;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace AubilousTouch.App.Services
 {
@@ -22,12 +23,7 @@ namespace AubilousTouch.App.Services
         public async void PublishMessage()
         {
             await _bus.Publish(new ExampleMessage());
-        }
-
-        public EmployeeService(IFileReader reader)
-        {
-            this._reader = reader;
-        }
+        }        
 
         public IList<Employee> ReadFromFile(byte[] file)
         {

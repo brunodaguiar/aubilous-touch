@@ -21,13 +21,13 @@ namespace AubilousTouch.Api.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Contact>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Employee>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         public IActionResult ReadFromFile(IFormFile file)
         {            
             if (file == null || file.Length == 0) return BadRequest();
 
-            IList<Contact> contacts;
+            IList<Employee> contacts;
             using (var memoryStream = new MemoryStream())
             {
                 file.CopyTo(memoryStream);

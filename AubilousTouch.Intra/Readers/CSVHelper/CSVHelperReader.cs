@@ -9,22 +9,17 @@ namespace AubilousTouch.Intra.Readers.CSVHelper
 {
     public class CSVHelperReader : IFileReader
     {
-        public IList<Contact> Read(byte[] file)
+        public IList<Employee> Read(byte[] file)
         {
-            using (Stream stream = new MemoryStream(file))
-            {
-                using (StreamReader streamReader = new StreamReader(stream))
-                {
-                    using (CsvHelper.CsvReader csvReader = new CsvHelper.CsvReader(streamReader, CultureInfo.InvariantCulture))
-                    {
-                        csvReader.Context.RegisterClassMap<ContactCSVHelperMapper>();
+            using Stream stream = new MemoryStream(file);
+            using StreamReader streamReader = new StreamReader(stream);
+            using CsvHelper.CsvReader csvReader = new CsvHelper.CsvReader(streamReader, CultureInfo.InvariantCulture);
 
-                        var records = csvReader.GetRecords<Contact>();
+            csvReader.Context.RegisterClassMap<ContactCSVHelperMapper>();
 
-                        return records.ToList();
-                    }
-                }
-            }
+            var records = csvReader.GetRecords<Employee>();
+
+            return records.ToList();
         }
     }
 }
