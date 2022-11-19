@@ -16,14 +16,11 @@ namespace AubilousTouch.Intra.Senders
             string authToken = Environment.GetEnvironmentVariable("TWILIO_SMS_GRUPOROXO_API_KEY");
             TwilioClient.Init(accountSid, authToken); 
 
-            //var subject = channelEmployeeMesssage.Message.Subject;
-            var subject = "Aubilous - Está na hora de procurar um emprego! Você está demitido :D";
+            var subject = channelEmployeeMesssage.Message.Subject;            
 
-            //var to = channelEmployeeMesssage.MessagesChannelPerEmployee.ContactTag;
-            var to = "+351912482034";
+            var to = channelEmployeeMesssage.MessagesChannelPerEmployee.ContactTag;            
 
-            //var body = channelEmployeeMesssage.Message.Body;
-            var body = "Tudo que é bom dura pouco e a partir deste momento, você não faz parte do nosso quadro";
+            var body = channelEmployeeMesssage.Message.Body;            
 
             try
             {
