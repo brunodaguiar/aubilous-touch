@@ -13,14 +13,14 @@ namespace AubilousTouch.Intra.Consumers
     public class ExampleConsumer : IConsumer<ExampleMessage>
     {
         private readonly ILogger _logger;
-        public ExampleConsumer(ILogger logger)
+        public ExampleConsumer()
         {
-            _logger = logger;
+            //_logger = logger;
         }
 
         public async Task Consume(ConsumeContext<ExampleMessage> context)
         {
-            _logger.LogInformation("Message: "+JsonConvert.SerializeObject(context.Message));
+            //_logger.LogInformation("Message: "+JsonConvert.SerializeObject(context.Message));
         }
     }
 }
