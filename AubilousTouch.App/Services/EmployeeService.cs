@@ -6,6 +6,7 @@ using AubilousTouch.Intra.Consumers.Messages;
 using MassTransit;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AubilousTouch.App.Services
 {
@@ -70,15 +71,15 @@ namespace AubilousTouch.App.Services
         {        
             var channelPerEmployees = new List<MessagesChannelPerEmployee>();
 
-            if(item.Whatsapp != null) channelPerEmployees.Add(BuildChannelPerEmployee(item.Whatsapp, "Whatsapp"));
+            if(item.Whatsapp != null) channelPerEmployees.Add(BuildChannelPerEmployee(item.AubilousId, item.Whatsapp, "Whatsapp"));
 
-            if (item.SMS != null) channelPerEmployees.Add(BuildChannelPerEmployee(item.SMS, "SMS"));
+            if (item.SMS != null) channelPerEmployees.Add(BuildChannelPerEmployee(item.AubilousId, item.SMS, "SMS"));
 
-            if (item.Email != null) channelPerEmployees.Add(BuildChannelPerEmployee(item.Email, "Email"));
+            if (item.Email != null) channelPerEmployees.Add(BuildChannelPerEmployee(item.AubilousId, item.Email, "Email"));
 
-            if (item.Telegram != null) channelPerEmployees.Add(BuildChannelPerEmployee(item.Telegram, "Telegram"));
+            if (item.Telegram != null) channelPerEmployees.Add(BuildChannelPerEmployee(item.AubilousId, item.Telegram, "Telegram"));
 
-            if (item.Slack != null) channelPerEmployees.Add(BuildChannelPerEmployee(item.Slack, "Slack"));
+            if (item.Slack != null) channelPerEmployees.Add(BuildChannelPerEmployee(item.AubilousId, item.Slack, "Slack"));
 
             //if (item.Icq)...
             //if (item.CaixaPostal)...
@@ -86,13 +87,21 @@ namespace AubilousTouch.App.Services
             return channelPerEmployees;
         }
 
-        private MessagesChannelPerEmployee BuildChannelPerEmployee(string channelContact, string channelName)
+        private MessagesChannelPerEmployee BuildChannelPerEmployee(string aubilousId, string channelContact, string channelName)
         {
             var channelPerEmployee = new MessagesChannelPerEmployee();
 
             channelPerEmployee.ContactTag = channelContact;
+            channelPerEmployee.EmployeeId = FindEmployeeByAubilousId(aubilousId);
             //TODO: channelPerEmployee.ChannelId = FindChannelByChannelName(channelName);
             return channelPerEmployee;
+        }
+
+        private int FindEmployeeByAubilousId(string aubilousId)
+        {
+            var employee = _employeeRepository.FindAsync(x => x.AubayId.Equals(aubilousId));
+
+            return employee.Result.FirstOrDefault().Id;
         }
     }
 }

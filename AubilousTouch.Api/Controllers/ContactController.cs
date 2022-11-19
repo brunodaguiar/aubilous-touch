@@ -37,5 +37,23 @@ namespace AubilousTouch.Api.Controllers
             
             return Ok(contacts);
         }
+        
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Employee>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        public IActionResult ReadFromFile(string title, string text, string file)
+        {            
+            if (file == null || file.Length == 0) return BadRequest();
+
+            var fileByteArray = Convert.FromBase64String(file);
+
+            IList<Employee> contacts;
+            using (var memoryStream = new MemoryStream(fileByteArray))
+            {
+                contacts = service.ReadFromFile(memoryStream.ToArray());
+            }                
+            
+            return Ok(contacts);
+        }
     }
 }
