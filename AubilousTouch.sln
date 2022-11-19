@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32106.194
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AubilousTouch.Api", "AubilousTouch.Api\AubilousTouch.Api.csproj", "{D2DAA397-C2E9-40FF-8442-4A663BB88500}"
 EndProject
@@ -11,7 +11,27 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AubilousTouch.Core", "Aubil
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AubilousTouch.App", "AubilousTouch.App\AubilousTouch.App.csproj", "{C56F4474-3B01-4462-BBD0-844DB20CD5F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AubilousTouch.Test", "AubilousTouch.Test\AubilousTouch.Test.csproj", "{113EBB09-DB65-4EA0-9926-88E5DA546129}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AubilousTouch.Test", "AubilousTouch.Test\AubilousTouch.Test.csproj", "{113EBB09-DB65-4EA0-9926-88E5DA546129}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "AubilousTouch.Portal", "AubilousTouch.Portal\", "{08EB5FE4-3B73-4ED5-810B-1FAD49C249A6}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_58292"
+		Debug.AspNetCompiler.PhysicalPath = "AubilousTouch.Portal\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58292\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_58292"
+		Release.AspNetCompiler.PhysicalPath = "AubilousTouch.Portal\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58292\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "58292"
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +59,10 @@ Global
 		{113EBB09-DB65-4EA0-9926-88E5DA546129}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{113EBB09-DB65-4EA0-9926-88E5DA546129}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{113EBB09-DB65-4EA0-9926-88E5DA546129}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08EB5FE4-3B73-4ED5-810B-1FAD49C249A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08EB5FE4-3B73-4ED5-810B-1FAD49C249A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08EB5FE4-3B73-4ED5-810B-1FAD49C249A6}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{08EB5FE4-3B73-4ED5-810B-1FAD49C249A6}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
