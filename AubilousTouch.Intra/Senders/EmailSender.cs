@@ -16,7 +16,7 @@ namespace AubilousTouch.Intra.Senders
 
         public async Task SendMessage(Message message)
         {                        
-            var client = new SendGridClient("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");
+            var client = new SendGridClient("");
             var from = new EmailAddress("gruporoxohackathon@gmail.com", "Hackathon Grupo Roxo");
             var subject = "Aubilous - Está na hora de procurar um emprego! Você está demitido :D";
             //var subject = message.Title;
