@@ -26,12 +26,12 @@ namespace AubilousTouch.App.Services
 
         public ContactService(IFileReader reader)
         {
-            this.reader = reader;
+            this._reader = reader;
         }
 
         public IList<Contact> ReadFromFile(byte[] file)
         {
-            IList<Contact> contacts = reader.Read(file);
+            IList<Contact> contacts = _reader.Read(file);
             
             return contacts;
         }
