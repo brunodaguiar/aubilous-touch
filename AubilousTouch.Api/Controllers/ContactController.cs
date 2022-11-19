@@ -13,9 +13,9 @@ namespace AubilousTouch.Api.Controllers
     [Route("[controller]")]
     public class ContactController : ControllerBase
     {
-        private readonly IContactService service;
+        readonly IEmployeeService service;
 
-        public ContactController(IContactService service)
+        public ContactController(IEmployeeService service)
         {
             this.service = service;
         }

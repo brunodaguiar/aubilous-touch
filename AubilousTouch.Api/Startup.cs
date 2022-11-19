@@ -45,10 +45,10 @@ namespace AubilousTouch.Api
                     cfg.ConfigureEndpoints(context);
                 });
 
-            });
-
-            services.AddScoped<IContactService, ContactService>();
-            
+            });            
+                        
+            //Dependency Injection
+            services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IFileReader, CSVHelperReader>();
         }
 

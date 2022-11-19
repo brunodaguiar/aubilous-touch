@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AubilousTouch.Core.Interfaces.Repositories
 {
-    public interface IContractRepository
+    public interface IEmployeeRepository
     {
 
     }
