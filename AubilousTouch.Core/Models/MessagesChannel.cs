@@ -1,6 +1,6 @@
 ﻿namespace AubilousTouch.Core.Models
 {
-    public class MessagesChannel
+    public class MessagesChannel : EntityBase
     {
         public int ChannelId { get; set; }
         public string ChannelName { get; set; }

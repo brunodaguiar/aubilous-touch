@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AubilousTouch.Core.Models
 {
-    public class MessagesGroupPerEmployee
+    public class MessagesGroupPerEmployee : EntityBase
     {
         public int Groupid { get; set; }
         public int EmployeeId { get; set; }
