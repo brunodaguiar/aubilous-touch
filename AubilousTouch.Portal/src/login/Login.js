@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Input, Button, Image, Box, Text } from 'native-base';
+import { Input, Button, Image, Box } from 'native-base';
 import {
-  View,
   StyleSheet,
-  PixelRatio,
   Dimensions,
   ImageBackground,
+  Alert,
+  Platform,
 } from 'react-native';
 import icon from './../../assets/aubilous_touch.png';
 import background from './../../assets/background1.jpg';
@@ -19,10 +19,13 @@ const Login = ({ navigation }) => {
   const logIn = () => {
     if (username.length > 0 && password === '123456') {
       navigation.navigate('Communications');
+    } else {
+      if (Platform.OS === 'web') {
+        alert('Dados incorretos. Por favor, tente novamente.');
+      } else {
+        Alert.alert('Atenção', 'Dados incorretos. Por favor, tente novamente.');
+      }
     }
-    // if (username === 'daniel.a.rocha@aubay.pt' && password === '123456') {
-    //   navigation.navigate('NewMessage');
-    // }
   };
 
   return (

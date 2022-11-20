@@ -54,14 +54,14 @@ export default function App() {
             animationDuration: 2,
           }}
         >
-          <Stack.Screen
+          {/* <Stack.Screen
             name="Login"
             component={Login}
             options={{
               headerShown: false,
               title: 'Login',
             }}
-          />
+          /> */}
           <Stack.Screen
             name="Communications"
             component={Communications}
