@@ -59,7 +59,7 @@ namespace AubilousTouch.App.Services
             return message;
         }
 
-        public async Task<IEnumerable<SentMessagesDto>> GetSentMessagesAsync()
+        public async Task<MessagesSentDto> GetSentMessagesAsync()
         {
             var messageCenters = await
                 _messageCenterRepository
@@ -96,7 +96,14 @@ namespace AubilousTouch.App.Services
                 });
             }
 
-            return await Task.FromResult(sentMessages);
+            MessagesSentDto result = new MessagesSentDto()
+            {
+                Messages = sentMessages
+            };
+
+            result.CalculateStatistics();
+
+            return await Task.FromResult(result);
         }
 
         public async Task SaveInMessageCenterFromFileAsync(IList<MessagesChannelPerEmployee> messagesChannelPerEmployees, int messageId)
