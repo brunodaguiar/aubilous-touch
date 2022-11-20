@@ -9,7 +9,7 @@ using System.IO;
 namespace AubilousTouch.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/contact")]
     public class ContactController : ControllerBase
     {
         readonly IEmployeeService _employeeService;

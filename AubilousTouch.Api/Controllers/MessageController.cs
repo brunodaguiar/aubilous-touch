@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AubilousTouch.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/message")]
     [ApiController]
     public class MessageController : ControllerBase
     {
