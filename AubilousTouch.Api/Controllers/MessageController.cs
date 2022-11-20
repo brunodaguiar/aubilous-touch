@@ -1,6 +1,10 @@
-﻿using AubilousTouch.Core.Interfaces.Services;
+﻿using AubilousTouch.Core.Dto;
+using AubilousTouch.Core.Interfaces.Services;
 using AubilousTouch.Core.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AubilousTouch.Api.Controllers
 {
@@ -16,9 +20,22 @@ namespace AubilousTouch.Api.Controllers
         }
 
         [HttpPost]
-        public void SendMessage([FromBody] ChannelEmployeeMessage channelEmployeeMesssage)
+        public async Task<IActionResult> SendMessage([FromBody] ChannelEmployeeMessage channelEmployeeMesssage)
         {
-            _service.SendMessage(channelEmployeeMesssage);
+            await _service.SendMessageAsync(channelEmployeeMesssage);
+            return Ok();
+        }
+
+        /// <summary>
+        /// Obtem a lista de mensagens enviadas
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<SentMessagesDto>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        public async Task<IActionResult> GetSentMessages()
+        {
+            return Ok(await _service.GetSentMessagesAsync());
         }
     }
 }

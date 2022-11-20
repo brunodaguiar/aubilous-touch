@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace AubilousTouch.Api.Controllers
 {
@@ -54,12 +55,12 @@ namespace AubilousTouch.Api.Controllers
         [HttpPost("SendCommunication")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Employee>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
-        public IActionResult SendCommunication(string title, string text, string file)
+        public async Task<IActionResult> SendCommunication(string title, string text, string file)
         {
             if(string.IsNullOrEmpty(title) || string.IsNullOrEmpty(text) || file == null || file.Length == 0)
                 return BadRequest();
 
-            Message message = _messageService.SaveMessage(title, text);                
+            Message message = await _messageService.SaveMessageAsync(title, text);                
             
             return Ok();
         }
