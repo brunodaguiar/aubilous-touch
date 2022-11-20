@@ -4,6 +4,7 @@ import {
   Avatar,
   Badge,
   Box,
+  Center,
   Fab,
   FlatList,
   HStack,
@@ -20,20 +21,63 @@ import {
   ImageBackground,
   StyleSheet,
   Dimensions,
+  Platform,
+  PixelRatio,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { getCommunications } from './Communications.service';
 
 const deviceWidth = Dimensions.get('window').width;
 
-const Communications = ({ navigation }) => {
-  const [lastCommunications, setLastCommunications] = useState([]);
+const Communications = () => {
+  // const [lastCommunications, setLastCommunications] = useState([]);
 
-  //useEffect(() => {}, [username, password]);
+  // useEffect(() => {
+  //   const result = getCommunications(setLastCommunications);
+  // }, []);
 
-  useEffect(() => {
-    const result = getCommunications(setLastCommunications);
-  },[])
+  const lastCommunications = [
+    {
+      message: {
+        subject: 'Titulo 2',
+        body: 'description 2 description 2 description 2 description 2 description 2 description 2 description 2 description 2 description 2 ',
+        image:
+          'https://fujifilm-x.com/wp-content/uploads/2021/01/gfx100s_sample_04_thum-1.jpg',
+        deliveredPercentage: 82,
+        date: '2022-11-19T00:21:03.066Z',
+      },
+    },
+    {
+      message: {
+        subject: 'Titulo 2',
+        body: 'description 2 description 2 description 2 description 2 description 2 description 2 description 2 description 2 description 2 ',
+        image:
+          'https://images.unsplash.com/photo-1579353977828-2a4eab540b9a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c2FtcGxlfGVufDB8fDB8fA%3D%3D&w=1000&q=80',
+        deliveredPercentage: 98,
+        date: '2022-05-01T00:21:40.694Z',
+      },
+    },
+    {
+      message: {
+        subject: 'Titulo 2',
+        body: 'description 2 description 2 description 2 description 2 description 2 description 2 description 2 description 2 description 2 ',
+        image:
+          'https://images.unsplash.com/photo-1579353977828-2a4eab540b9a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c2FtcGxlfGVufDB8fDB8fA%3D%3D&w=1000&q=80',
+        deliveredPercentage: 98,
+        date: '2022-05-01T00:21:40.694Z',
+      },
+    },
+    {
+      message: {
+        subject: 'Titulo 2',
+        body: 'description 2 description 2 description 2 description 2 description 2 description 2 description 2 description 2 description 2 ',
+        image:
+          'https://cdn.pixabay.com/photo/2019/07/30/18/26/surface-4373559__340.jpg',
+        deliveredPercentage: 59,
+        date: '2022-11-19T00:21:27.694Z',
+      },
+    },
+  ];
 
   return (
     <View style={styles.container}>
@@ -41,36 +85,16 @@ const Communications = ({ navigation }) => {
         renderItem={({ item }) => (
           <Box
             backgroundColor={'white'}
-            width={deviceWidth * 0.9}
+            width={deviceWidth * 0.95}
             _dark={{
               borderColor: 'muted.50',
             }}
-            borderRadius="lg"
+            borderRadius="md"
             my="2"
-            mx="3"
           >
             <VStack>
-              <Box style={{ flex: 1 }} minHeight="150px">
-                <Box style={{ flex: 1 }}>
-                  <Box
-                    flex={1}
-                    backgroundColor={
-                      item.deliveredPercentage < 60
-                        ? 'yellow.200'
-                        : 'success.600'
-                    }
-                    borderRadius="md"
-                    p={1}
-                    top={5}
-                    right={5}
-                    position="absolute"
-                  >
-                    <Text mx={1}>{item.deliveredPercentage}%</Text>
-                  </Box>
-                </Box>
-              </Box>
               <HStack>
-                <VStack>
+                <Box flex={4}>
                   <Text
                     _dark={{
                       color: 'warmGray.50',
@@ -95,13 +119,25 @@ const Communications = ({ navigation }) => {
                   >
                     {item.message.body}
                   </Text>
-                </VStack>
+                </Box>
+                <Box
+                  bgColor="primary.600"
+                  py={1}
+                  px={2}
+                  rounded="md"
+                  height={'60%'}
+                >
+                  <Text mx={1} color="white" fontSize="xl">
+                    {item.deliveredPercentage || 0}%{' '}
+                    {Platform.OS === 'web' && 'entregue'}
+                  </Text>
+                </Box>
               </HStack>
             </VStack>
           </Box>
         )}
         data={lastCommunications}
-        maxWidth={'95%'}
+        maxWidth={'97%'}
       />
     </View>
   );
@@ -110,9 +146,10 @@ const Communications = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ecf0f1',
+    backgroundColor: '#f4f4f4',
   },
   input: {
     width: 200,
