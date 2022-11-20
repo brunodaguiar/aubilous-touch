@@ -20,14 +20,15 @@ namespace AubilousTouch.Core.Dto
 
         public void CalculateStatistics()
         {
-            var messageIds = Messages.Select(m => m.Message.Id).Distinct();
+            var messages = Messages.Select(m => m.Message);
+            var messageIds = messages.Select(m => m.Id).Distinct().ToList();
             List<MessagePercentagesDto> percentages = new List<MessagePercentagesDto>();
             foreach (var id in messageIds)
             {
                 var messagesById = Messages.Where(m => m.Message.Id == id);
                 var totalMessages = messagesById.Count();
-                var successRate = messagesById.Where(m => m.MessageCenter.Received.Value == true).Count();
-                var failRate = messagesById.Where(m => m.MessageCenter.Received.Value == false).Count();
+                var successRate = messagesById.Where(m => m.MessageCenter.Received.Value == true).Count() /totalMessages;
+                var failRate = messagesById.Where(m => m.MessageCenter.Received.Value == false).Count()/totalMessages;
                 
                 var messagePercentage = new MessagePercentagesDto() { 
                     MessageId = id,
