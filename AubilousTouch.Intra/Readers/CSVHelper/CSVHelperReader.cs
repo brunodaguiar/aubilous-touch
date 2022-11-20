@@ -9,7 +9,7 @@ namespace AubilousTouch.Intra.Readers.CSVHelper
 {
     public class CSVHelperReader : IFileReader
     {
-        public IList<Employee> Read(byte[] file)
+        public IList<ContactFileItem> Read(byte[] file)
         {
             using Stream stream = new MemoryStream(file);
             using StreamReader streamReader = new StreamReader(stream);
@@ -17,7 +17,7 @@ namespace AubilousTouch.Intra.Readers.CSVHelper
 
             csvReader.Context.RegisterClassMap<ContactCSVHelperMapper>();
 
-            var records = csvReader.GetRecords<Employee>();
+            var records = csvReader.GetRecords<ContactFileItem>();
 
             return records.ToList();
         }

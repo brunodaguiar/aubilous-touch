@@ -5,5 +5,6 @@ namespace AubilousTouch.Core.Interfaces.Services
     public interface IMessageService
     {
         void SendMessage(ChannelEmployeeMessage channelEmployeeMesssage);
+        Message SaveMessage(string title, string text);
     }
 }
