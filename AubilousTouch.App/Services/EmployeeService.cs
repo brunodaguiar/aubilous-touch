@@ -16,22 +16,23 @@ namespace AubilousTouch.App.Services
     {
         private IFileReader _reader;
         private IMessagesChannelService _messagesChannelServices;
+        private IMessageService _messagesService;
         private IEmployeeRepository _employeeRepository;
         private IMessagesChannelPerEmployeeRepository _messageChannelPerEmployeeRepository;
-        private IBus _bus;
+        
 
         public EmployeeService(
             IFileReader reader,
             IMessagesChannelService messagesChannelServices,
+            IMessageService messagesService,
             IEmployeeRepository employeeRepository,
-            IMessagesChannelPerEmployeeRepository messageChannelPerEmployeeRepository,
-            IBus bus)
+            IMessagesChannelPerEmployeeRepository messageChannelPerEmployeeRepository)
         {
-            _messageChannelPerEmployeeRepository = messageChannelPerEmployeeRepository ?? throw new ArgumentNullException(nameof(employeeRepository));
-            _messagesChannelServices = messagesChannelServices ?? throw new ArgumentNullException(nameof(employeeRepository));
+            _messageChannelPerEmployeeRepository = messageChannelPerEmployeeRepository ?? throw new ArgumentNullException(nameof(messageChannelPerEmployeeRepository));
+            _messagesChannelServices = messagesChannelServices ?? throw new ArgumentNullException(nameof(messagesChannelServices));
             _employeeRepository = employeeRepository ?? throw new ArgumentNullException(nameof(employeeRepository));
-            _reader = reader ?? throw new ArgumentNullException(nameof(reader)); 
-            _bus = bus ?? throw new ArgumentNullException(nameof(bus));
+            _messagesService = messagesService ?? throw new ArgumentNullException(nameof(messagesService));
+            _reader = reader ?? throw new ArgumentNullException(nameof(reader));
         }
 
         public async void PublishMessage()
@@ -39,13 +40,13 @@ namespace AubilousTouch.App.Services
             await _bus.Publish(new ExampleMessage());
         }
 
-        public async Task ReadFromBase64FileAsync(string file)
+        public async Task ReadFromBase64FileAsync(string file, int messageId)
         {
             var fileByteArray = Convert.FromBase64String(file);
             IList<Employee> contacts;
             using (var memoryStream = new MemoryStream(fileByteArray))
             {
-                await SaveFromFile(memoryStream.ToArray());
+                await SaveFromFile(memoryStream.ToArray(), messageId);
             }            
         }
 
@@ -57,14 +58,16 @@ namespace AubilousTouch.App.Services
             return employees;
         }
 
-        public async Task SaveFromFile(byte[] file)
+        public async Task SaveFromFile(byte[] file, int messageId)
         {
             IList<ContactFileItem> contactFileItems = _reader.Read(file);
 
-            await SaveFromContractFileAsync(contactFileItems);
+            IList<MessagesChannelPerEmployee> messagesChannelPerEmployees = await SaveMessagesChannelPerEmployeeFromContractFileAsync(contactFileItems);
+            
+            await _messagesService.SaveInMessageCenterFromFileAsync(messagesChannelPerEmployees, messageId);
         }
 
-        public async Task SaveFromContractFileAsync(IList<ContactFileItem> contactFileItems)
+        public async Task<IList<MessagesChannelPerEmployee>> SaveMessagesChannelPerEmployeeFromContractFileAsync(IList<ContactFileItem> contactFileItems)
         {
             IList<MessagesChannelPerEmployee> messagesChannelPerEmployee = await ConvertFileItemsToChannelPerEmployees(contactFileItems);
 
@@ -72,6 +75,8 @@ namespace AubilousTouch.App.Services
             {
                 await _messageChannelPerEmployeeRepository.AddAsync(item);                
             }
+
+            return messagesChannelPerEmployee;
         }
 
         private async Task<IList<MessagesChannelPerEmployee>> ConvertFileItemsToChannelPerEmployees(IList<ContactFileItem> contactFileItems)
@@ -112,9 +117,15 @@ namespace AubilousTouch.App.Services
         {
             var channelPerEmployee = new MessagesChannelPerEmployee();
 
+            int? employeeId = (await FindEmployeeByAubilousId(aubilousId))?.Id;
+            int? channelId = (await _messagesChannelServices.FindChannelByChannelName(channelName))?.Id;
+
+            if (employeeId == null) throw new Exception($"Aubilous Id Not Found: {aubilousId}");
+            if (channelId == null) throw new Exception($"Channel Not Found: {channelName}");
+
             channelPerEmployee.ContactTag = channelContact;
-            channelPerEmployee.EmployeeId = (await FindEmployeeByAubilousId(aubilousId)).Id;
-            channelPerEmployee.ChannelId = (await _messagesChannelServices.FindChannelByChannelName(channelName)).Id;
+            channelPerEmployee.EmployeeId = employeeId.Value;
+            channelPerEmployee.ChannelId = channelId.Value;
 
             return channelPerEmployee;
         }
@@ -124,7 +135,6 @@ namespace AubilousTouch.App.Services
             var employee = await _employeeRepository.FindAsync(x => x.AubayId == aubilousId);
 
             return employee.FirstOrDefault();
-        }
-
+        }        
     }
 }
