@@ -49,7 +49,7 @@ namespace AubilousTouch.App.Services
             var messageCenters = await
                 _messageCenterRepository
                     .FindAsync(mc => mc.Sent != null &&
-                                     mc.Sent == true);
+                                     mc.Sent == false);
 
             var messageIds = messageCenters.Select(mc => mc.MessageId);
             var messageChannelPerEmployeeIds =
