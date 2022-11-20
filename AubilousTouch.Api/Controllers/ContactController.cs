@@ -60,8 +60,10 @@ namespace AubilousTouch.Api.Controllers
             if(string.IsNullOrEmpty(title) || string.IsNullOrEmpty(text) || file == null || file.Length == 0)
                 return BadRequest();
 
-            Message message = await _messageService.SaveMessageAsync(title, text);                
-            
+            Message message = await _messageService.SaveMessageAsync(title, text);
+
+            _employeeService.ReadFromBase64File(file);
+
             return Ok();
         }
     }
