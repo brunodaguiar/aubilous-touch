@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net;
 
 namespace AubilousTouch.Api.Controllers
 {
@@ -13,13 +12,20 @@ namespace AubilousTouch.Api.Controllers
     [Route("[controller]")]
     public class ContactController : ControllerBase
     {
-        readonly IEmployeeService service;
+        readonly IEmployeeService _employeeService;
+        readonly IMessageService _messageService;
 
-        public ContactController(IEmployeeService service)
+        public ContactController(IEmployeeService employeeService, IMessageService messageService)
         {
-            this.service = service;
+            this._employeeService = employeeService;
+            this._messageService = messageService;
         }
 
+        /// <summary>
+        /// Converte um arquivo em uma lista de Empregados
+        /// </summary>
+        /// <param name="file">Conteudo de um input='file'</param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Employee>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
@@ -32,28 +38,30 @@ namespace AubilousTouch.Api.Controllers
             {
                 file.CopyTo(memoryStream);
 
-                contacts = service.ReadFromFile(memoryStream.ToArray());
+                contacts = _employeeService.ReadFromFile(memoryStream.ToArray());
             }                
             
             return Ok(contacts);
         }
         
+        /// <summary>
+        /// Processa menssagem e contatos
+        /// </summary>
+        /// <param name="title">Assunto/Subject da mensagem</param>
+        /// <param name="text">Text/Body da mensagem</param>
+        /// <param name="file">Arquivo em Base64</param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Employee>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
-        public IActionResult ReadFromFile(string title, string text, string file)
-        {            
-            if (file == null || file.Length == 0) return BadRequest();
+        public IActionResult SendCommunication(string title, string text, string file)
+        {
+            if(string.IsNullOrEmpty(title) || string.IsNullOrEmpty(text) || file == null || file.Length == 0)
+                return BadRequest();
 
-            var fileByteArray = Convert.FromBase64String(file);
-
-            IList<Employee> contacts;
-            using (var memoryStream = new MemoryStream(fileByteArray))
-            {
-                contacts = service.ReadFromFile(memoryStream.ToArray());
-            }                
+            Message message = _messageService.SaveMessage(title, text);                
             
-            return Ok(contacts);
+            return Ok();
         }
     }
 }

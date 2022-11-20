@@ -6,6 +6,7 @@ using AubilousTouch.Intra.Consumers.Messages;
 using MassTransit;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace AubilousTouch.App.Services
@@ -32,9 +33,28 @@ namespace AubilousTouch.App.Services
         public async void PublishMessage()
         {
             await _bus.Publish(new ExampleMessage());
-        }        
+        }
+
+        public void ReadFromBase64File(string file)
+        {
+            var fileByteArray = Convert.FromBase64String(file);
+            IList<Employee> contacts;
+            using (var memoryStream = new MemoryStream(fileByteArray))
+            {
+                contacts = SaveFromFile(memoryStream.ToArray());
+            }            
+        }
 
         public IList<Employee> ReadFromFile(byte[] file)
+        {
+            IList<ContactFileItem> contactFileItems = _reader.Read(file);
+
+            SaveFromContractFile(contactFileItems);
+
+            return new List<Employee>(); //TODO: Arrumar um retorno
+        }
+
+        public IList<Employee> SaveFromFile(byte[] file)
         {
             IList<ContactFileItem> contactFileItems = _reader.Read(file);
 
