@@ -65,7 +65,7 @@ namespace AubilousTouch.Api.Controllers
             try
             {
 
-                await _employeeService.ReadFromBase64FileAsync(file);
+                await _employeeService.ReadFromBase64FileAsync(file, message.Id);
             } 
             catch (Exception e)
             {

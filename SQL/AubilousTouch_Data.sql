@@ -5,6 +5,12 @@ SET IDENTITY_INSERT [dbo].[MessagesChannel] ON
 INSERT [dbo].[MessagesChannel] ([id], [channelName], [isActive]) VALUES (1, N'SMS', 1)
 INSERT [dbo].[MessagesChannel] ([id], [channelName], [isActive]) VALUES (2, N'Telegram', 1)
 INSERT [dbo].[MessagesChannel] ([id], [channelName], [isActive]) VALUES (3, N'Email', 1)
+INSERT [dbo].[MessagesChannel] ([id], [channelName], [isActive]) VALUES (4, N'Whatsapp', 1)
+INSERT [dbo].[MessagesChannel] ([id], [channelName], [isActive]) VALUES (5, N'Skype', 1)
+INSERT [dbo].[MessagesChannel] ([id], [channelName], [isActive]) VALUES (5, N'Signal', 1)
+INSERT [dbo].[MessagesChannel] ([id], [channelName], [isActive]) VALUES (5, N'Teams', 1)
+INSERT [dbo].[MessagesChannel] ([id], [channelName], [isActive]) VALUES (5, N'Slack', 1)
+
 SET IDENTITY_INSERT [dbo].[MessagesChannel] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Employee] ON 
