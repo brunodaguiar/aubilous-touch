@@ -60,10 +60,12 @@ namespace AubilousTouch.Api
             //Dependency Injection
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IMessageService, MessageService>();
+            services.AddScoped<IMessagesChannelService, MessagesChannelService>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddScoped<IMessageCenterRepository, MessageCenterRepository>();
             services.AddScoped<IMessageService, MessageService>();
+            services.AddScoped<IMessagesChannelRepository, MessagesChannelRepository>();
             services.AddScoped<IMessagesChannelPerEmployeeRepository, MessagesChannelPerEmployeeRepository>();
             services.AddScoped<IFileReader, CSVHelperReader>();
             services.AddScoped<IMessageSender, EmailSender>();
