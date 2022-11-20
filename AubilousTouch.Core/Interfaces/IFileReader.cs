@@ -1,6 +1,5 @@
 ﻿using AubilousTouch.Core.Models;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace AubilousTouch.Core.Interfaces
 {
