@@ -19,22 +19,20 @@ namespace AubilousTouch.App.Services
         private IMessageService _messagesService;
         private IEmployeeRepository _employeeRepository;
         private IMessagesChannelPerEmployeeRepository _messageChannelPerEmployeeRepository;
-        private IBus _bus;
+        
 
         public EmployeeService(
             IFileReader reader,
             IMessagesChannelService messagesChannelServices,
             IMessageService messagesService,
             IEmployeeRepository employeeRepository,
-            IMessagesChannelPerEmployeeRepository messageChannelPerEmployeeRepository,
-            IBus bus)
+            IMessagesChannelPerEmployeeRepository messageChannelPerEmployeeRepository)
         {
             _messageChannelPerEmployeeRepository = messageChannelPerEmployeeRepository ?? throw new ArgumentNullException(nameof(messageChannelPerEmployeeRepository));
             _messagesChannelServices = messagesChannelServices ?? throw new ArgumentNullException(nameof(messagesChannelServices));
             _employeeRepository = employeeRepository ?? throw new ArgumentNullException(nameof(employeeRepository));
             _messagesService = messagesService ?? throw new ArgumentNullException(nameof(messagesService));
-            _reader = reader ?? throw new ArgumentNullException(nameof(reader)); 
-            _bus = bus ?? throw new ArgumentNullException(nameof(bus));
+            _reader = reader ?? throw new ArgumentNullException(nameof(reader));
         }
 
         public async void PublishMessage()

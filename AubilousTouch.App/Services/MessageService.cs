@@ -3,6 +3,8 @@ using AubilousTouch.Core.Interfaces;
 using AubilousTouch.Core.Interfaces.Repositories;
 using AubilousTouch.Core.Interfaces.Services;
 using AubilousTouch.Core.Models;
+using AubilousTouch.Intra.Consumers.Messages;
+using MassTransit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,22 +16,29 @@ namespace AubilousTouch.App.Services
     {
         private IMessageSender _sender;
         private IMessageRepository _messageRepository;
+        private IMessagesChannelRepository _messagesChannelRepository;
         private IMessageCenterRepository _messageCenterRepository;
         private IMessagesChannelPerEmployeeRepository _messageChannelPerEmployeeRepository;
+        private IBus _bus;
 
         public MessageService(
             IMessageSender sender,
             IMessageRepository repository,
+            IMessagesChannelRepository messagesChannelRepository,
             IMessageCenterRepository messageCenterRepository,
-            IMessagesChannelPerEmployeeRepository messagesChannelPerEmployeeRepository)
+            IMessagesChannelPerEmployeeRepository messagesChannelPerEmployeeRepository,
+            IBus bus)
         {
             _sender = sender;
             _messageRepository = repository ?? 
                 throw new ArgumentNullException(nameof(repository));
+            _messagesChannelRepository = messagesChannelRepository ??
+                throw new ArgumentNullException(nameof(messagesChannelRepository));
             _messageCenterRepository = messageCenterRepository ?? 
                 throw new ArgumentNullException(nameof(messageCenterRepository));
             _messageChannelPerEmployeeRepository = messagesChannelPerEmployeeRepository ?? 
                 throw new ArgumentNullException(nameof(messagesChannelPerEmployeeRepository));
+            _bus = bus ?? throw new ArgumentNullException(nameof(bus));
         }
 
         public async Task SendMessageAsync(ChannelEmployeeMessage channelEmployeeMesssage)
@@ -92,19 +101,27 @@ namespace AubilousTouch.App.Services
 
         public async Task SaveInMessageCenterFromFileAsync(IList<MessagesChannelPerEmployee> messagesChannelPerEmployees, int messageId)
         {
+            var emailsMessageToDispatch = new List<int>();
+
             foreach(var messagesChannelPerEmployee in messagesChannelPerEmployees)
             {
                 var messageCenter = new MessageCenter
                 {
                     MessageId = messageId,
                     MessagesChannelPerEmployeeId = messagesChannelPerEmployee.Id,
-                    Sent = true,
+                    Sent = false,
                     Received = false,
                     MessageSentDate = DateTime.Now,
-                    Status = "Sent"
+                    Status = "In Queue"
                 };
 
                 await _messageCenterRepository.AddAsync(messageCenter);
+
+                var channel = await _messagesChannelRepository.GetByIdAsync(messagesChannelPerEmployee.ChannelId);
+
+                if (channel.ChannelName.Equals("whatsapp", StringComparison.OrdinalIgnoreCase))
+                    await _bus.Publish(new EmailWorkerMessage { MessageCenterIds = emailsMessageToDispatch });
+
             }            
         }
     }
