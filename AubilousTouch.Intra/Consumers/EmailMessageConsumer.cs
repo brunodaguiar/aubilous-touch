@@ -40,7 +40,10 @@ namespace AubilousTouch.Intra.Consumers
             foreach (var item in messageCenters)
             {
                 Message message = await _messageRepository.GetByIdAsync(item.MessageId.Value);
-                var channelEmployee = await _messageChannelPerEmployeeRepository.GetByIdAsync(item.MessagesChannelPerEmployeeId.Value);
+                var channelEmployee = await _messageChannelPerEmployeeRepository
+                                                .GetByIdAsync(item.MessagesChannelPerEmployeeId.Value);
+
+                if (channelEmployee.ChannelId != 3) continue;
 
                 try
                 {
