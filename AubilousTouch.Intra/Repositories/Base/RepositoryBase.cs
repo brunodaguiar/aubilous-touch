@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace AubilousTouch.Intra.Repositories.Base
@@ -64,7 +63,7 @@ namespace AubilousTouch.Intra.Repositories.Base
 
         public void Dispose()
         {
-            Db?.Dispose();
+            //Db?.Dispose();
         }
 
         public int DeleteMany(Expression<Func<TEntity, bool>> predicate)

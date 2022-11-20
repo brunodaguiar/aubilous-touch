@@ -1,12 +1,13 @@
 ﻿using AubilousTouch.Core.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AubilousTouch.Core.Interfaces.Services
 {
     public interface IEmployeeService
-    {        
-        IList<Employee> SaveFromFile(byte[] file);
-        void ReadFromBase64File(string file);
+    {
+        Task SaveFromFile(byte[] file, int messageId);
+        Task ReadFromBase64FileAsync(string file, int id);
         IList<Employee> ReadFromFile(byte[] file);
     }
 }

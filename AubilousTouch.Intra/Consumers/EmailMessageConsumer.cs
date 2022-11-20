@@ -15,11 +15,13 @@ namespace AubilousTouch.Intra.Consumers
         public IMessageCenterRepository _messageCenterRepository;
         public IMessageRepository _messageRepository; 
         public IMessageSender _emailSender;
+        public IMessagesChannelRepository _messageChannelReposiory;
         public IMessagesChannelPerEmployeeRepository _messageChannelPerEmployeeRepository;
 
         public EmailMessageConsumer(IMessageCenterRepository messageCenterRepository,
                                     IMessageRepository messageRepository,
                                     IMessagesChannelPerEmployeeRepository messageChannelPerEmployeeRepository,
+                                    IMessagesChannelRepository messageChannelRepository,
                                     IMessageSender messageSender)
         {
             _messageRepository = messageRepository ?? 
@@ -30,6 +32,8 @@ namespace AubilousTouch.Intra.Consumers
                 throw new ArgumentNullException(nameof(messageSender));
             _messageChannelPerEmployeeRepository = messageChannelPerEmployeeRepository ?? 
                 throw new ArgumentNullException(nameof(messageChannelPerEmployeeRepository));
+            _messageChannelReposiory = messageChannelRepository ??
+                throw new ArgumentNullException(nameof(messageChannelRepository));
         }
         public async Task Consume(ConsumeContext<EmailWorkerMessage> context)
         {
@@ -40,7 +44,11 @@ namespace AubilousTouch.Intra.Consumers
             foreach (var item in messageCenters)
             {
                 Message message = await _messageRepository.GetByIdAsync(item.MessageId.Value);
-                var channelEmployee = await _messageChannelPerEmployeeRepository.GetByIdAsync(item.MessagesChannelPerEmployeeId.Value);
+                var channelEmployee = await _messageChannelPerEmployeeRepository
+                                                .GetByIdAsync(item.MessagesChannelPerEmployeeId.Value);
+                var channel = await _messageChannelReposiory.GetByIdAsync(channelEmployee.ChannelId);
+
+                if (channel.ChannelName.ToLower() != "whatsapp") continue;
 
                 try
                 {
@@ -58,15 +66,19 @@ namespace AubilousTouch.Intra.Consumers
                     catch (Exception e)
                     {
                         item.Received = false;
+                        item.Status = "Exception on SendMessage";
                         await UpdateSaveAsync(item);
                     }
                     item.Received = true;
+                    item.MessageSentDate = DateTime.Now;
+                    item.Status = "Processed";
                     await UpdateSaveAsync(item);
                 } 
                 catch (Exception ex)
                 {
                     item.Sent = false;
                     item.Received = false;
+                    item.Status = "Exception on Updating Message: "+message.Id;
                     await UpdateSaveAsync(item);
                 }
             }
