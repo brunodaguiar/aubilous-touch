@@ -45,7 +45,7 @@ namespace AubilousTouch.App.Services
             IList<Employee> contacts;
             using (var memoryStream = new MemoryStream(fileByteArray))
             {
-                contacts = SaveFromFile(memoryStream.ToArray());
+                SaveFromFile(memoryStream.ToArray());
             }            
         }
 
