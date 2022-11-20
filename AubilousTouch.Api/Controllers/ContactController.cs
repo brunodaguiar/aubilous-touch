@@ -27,7 +27,7 @@ namespace AubilousTouch.Api.Controllers
         /// </summary>
         /// <param name="file">Conteudo de um input='file'</param>
         /// <returns></returns>
-        [HttpPost("ReadFromFile")]
+        [HttpPost("ReadFromFile-DEPRECATED")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Employee>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         public IActionResult ReadFromFile(IFormFile file)
@@ -52,7 +52,7 @@ namespace AubilousTouch.Api.Controllers
         /// <param name="text">Text/Body da mensagem</param>
         /// <param name="file">Arquivo em Base64</param>
         /// <returns></returns>
-        [HttpPost("SendCommunication")]
+        [HttpPost("send-communication")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Employee>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         public async Task<IActionResult> SendCommunication(string title, string text, string file)
