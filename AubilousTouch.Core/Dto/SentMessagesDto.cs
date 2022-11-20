@@ -16,9 +16,9 @@ namespace AubilousTouch.Core.Dto
     {
         public IEnumerable<SentMessagesDto> Messages { get; set; }
 
-        public IList<MessagePercentagesDto> Stastitics { get; set; }
+        public IEnumerable<MessagePercentagesDto> Statistics { get; set; }
 
-        public void CalculateStatistics()
+        public IList<MessagePercentagesDto> CalculateStatistics()
         {
             var messages = Messages.Select(m => m.Message);
             var messageIds = messages.Select(m => m.Id).Distinct().ToList();
@@ -27,27 +27,27 @@ namespace AubilousTouch.Core.Dto
             {
                 var messagesById = Messages.Where(m => m.Message.Id == id);
                 var totalMessages = messagesById.Count();
-                var successRate = messagesById.Where(m => m.MessageCenter.Received.Value == true).Count() /totalMessages;
-                var failRate = messagesById.Where(m => m.MessageCenter.Received.Value == false).Count()/totalMessages;
+                float successMessages = messagesById.Where(m => m.MessageCenter.Received.Value == true).Count();
+                float failMessages = messagesById.Where(m => m.MessageCenter.Received.Value == false).Count();
                 
                 var messagePercentage = new MessagePercentagesDto() { 
                     MessageId = id,
                     TotalMessages = totalMessages,
-                    SuccessRate = successRate,
-                    FailRate = failRate
+                    SuccessRate = (successMessages / totalMessages) * 100,
+                    FailRate = (failMessages / totalMessages) * 100
                 };
                 percentages.Add(messagePercentage);
             }
 
-            Stastitics = percentages;
+            return percentages;
         }
     }
 
     public class MessagePercentagesDto
     {
-        public int MessageId;
-        public float SuccessRate;
-        public float FailRate;
-        public int TotalMessages;
+        public int MessageId { get; set; }
+        public float SuccessRate { get; set; }
+        public float FailRate { get; set; }
+        public int TotalMessages { get; set; }
     }
 }

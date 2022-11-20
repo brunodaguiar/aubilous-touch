@@ -101,7 +101,7 @@ namespace AubilousTouch.App.Services
                 Messages = sentMessages
             };
 
-            result.CalculateStatistics();
+            result.Statistics = result.CalculateStatistics();
 
             return await Task.FromResult(result);
         }
