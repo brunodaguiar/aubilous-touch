@@ -3,6 +3,7 @@ using AubilousTouch.Core.Interfaces;
 using AubilousTouch.Core.Interfaces.Repositories;
 using AubilousTouch.Core.Interfaces.Services;
 using AubilousTouch.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,11 +20,16 @@ namespace AubilousTouch.App.Services
         public MessageService(
             IMessageSender sender,
             IMessageRepository repository,
-            IMessageCenterRepository messageCenterRepository)
+            IMessageCenterRepository messageCenterRepository,
+            IMessagesChannelPerEmployeeRepository messagesChannelPerEmployeeRepository)
         {
             _sender = sender;
-            _messageRepository = repository;
-            _messageCenterRepository = messageCenterRepository;
+            _messageRepository = repository ?? 
+                throw new ArgumentNullException(nameof(repository));
+            _messageCenterRepository = messageCenterRepository ?? 
+                throw new ArgumentNullException(nameof(messageCenterRepository));
+            _messageChannelPerEmployeeRepository = messagesChannelPerEmployeeRepository ?? 
+                throw new ArgumentNullException(nameof(messagesChannelPerEmployeeRepository));
         }
 
         public async Task SendMessageAsync(ChannelEmployeeMessage channelEmployeeMesssage)
@@ -49,7 +55,7 @@ namespace AubilousTouch.App.Services
             var messageCenters = await
                 _messageCenterRepository
                     .FindAsync(mc => mc.Sent != null &&
-                                     mc.Sent == false);
+                                     mc.Sent == true);
 
             var messageIds = messageCenters.Select(mc => mc.MessageId);
             var messageChannelPerEmployeeIds =

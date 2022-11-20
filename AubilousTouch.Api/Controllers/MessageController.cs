@@ -22,5 +22,11 @@ namespace AubilousTouch.Api.Controllers
             await _service.SendMessageAsync(channelEmployeeMesssage);
             return Ok();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetSentMssages()
+        {
+            return Ok(await _service.GetSentMessagesAsync());
+        }
     }
 }
