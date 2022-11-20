@@ -54,8 +54,10 @@ namespace AubilousTouch.Api
 
 
             services.AddDbContext<AubilousTouchDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                       .EnableSensitiveDataLogging()
+                       .EnableDetailedErrors());
+            
 
             //Dependency Injection
             services.AddScoped<IEmployeeService, EmployeeService>();

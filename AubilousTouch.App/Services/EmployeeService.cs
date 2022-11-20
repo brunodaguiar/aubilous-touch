@@ -39,13 +39,13 @@ namespace AubilousTouch.App.Services
             await _bus.Publish(new ExampleMessage());
         }
 
-        public void ReadFromBase64File(string file)
+        public async Task ReadFromBase64FileAsync(string file)
         {
             var fileByteArray = Convert.FromBase64String(file);
             IList<Employee> contacts;
             using (var memoryStream = new MemoryStream(fileByteArray))
             {
-                SaveFromFile(memoryStream.ToArray());
+                await SaveFromFile(memoryStream.ToArray());
             }            
         }
 
@@ -57,14 +57,14 @@ namespace AubilousTouch.App.Services
             return employees;
         }
 
-        public void SaveFromFile(byte[] file)
+        public async Task SaveFromFile(byte[] file)
         {
             IList<ContactFileItem> contactFileItems = _reader.Read(file);
 
-            SaveFromContractFile(contactFileItems);
+            await SaveFromContractFileAsync(contactFileItems);
         }
 
-        public async Task SaveFromContractFile(IList<ContactFileItem> contactFileItems)
+        public async Task SaveFromContractFileAsync(IList<ContactFileItem> contactFileItems)
         {
             IList<MessagesChannelPerEmployee> messagesChannelPerEmployee = await ConvertFileItemsToChannelPerEmployees(contactFileItems);
 
@@ -121,9 +121,10 @@ namespace AubilousTouch.App.Services
 
         private async Task<Employee> FindEmployeeByAubilousId(string aubilousId)
         {
-            var employee = await _employeeRepository.FindAsync(x => x.AubayId.Equals(aubilousId));
+            var employee = await _employeeRepository.FindAsync(x => x.AubayId == aubilousId);
 
             return employee.FirstOrDefault();
         }
+
     }
 }

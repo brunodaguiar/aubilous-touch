@@ -62,7 +62,15 @@ namespace AubilousTouch.Api.Controllers
 
             Message message = await _messageService.SaveMessageAsync(title, text);
 
-            _employeeService.ReadFromBase64File(file);
+            try
+            {
+
+                await _employeeService.ReadFromBase64FileAsync(file);
+            } 
+            catch (Exception e)
+            {
+                throw e;
+            }
 
             return Ok();
         }

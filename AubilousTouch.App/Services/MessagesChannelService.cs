@@ -20,7 +20,7 @@ namespace AubilousTouch.App.Services
         public async Task<MessagesChannel> FindChannelByChannelName(string channelName)
         {
             IEnumerable<MessagesChannel> messageChannel 
-                = await _repository.FindAsync(x => x.ChannelName.Equals(channelName, StringComparison.OrdinalIgnoreCase));
+                = await _repository.FindAsync(x => x.ChannelName.ToLower() == channelName.ToLower());
 
             return messageChannel.FirstOrDefault();
         }

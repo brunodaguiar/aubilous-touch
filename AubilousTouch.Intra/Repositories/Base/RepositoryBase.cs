@@ -64,7 +64,7 @@ namespace AubilousTouch.Intra.Repositories.Base
 
         public void Dispose()
         {
-            Db?.Dispose();
+            //Db?.Dispose();
         }
 
         public int DeleteMany(Expression<Func<TEntity, bool>> predicate)
