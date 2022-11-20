@@ -5,9 +5,11 @@ using AubilousTouch.Intra.Repositories.Base;
 
 namespace AubilousTouch.Intra.Repositories
 {
-    public class MessageRepository : RepositoryBase<Message>, IMessageRepository
+    public class MessageCenterRepository : RepositoryBase<MessageCenter>, IMessageCenterRepository
     {
-        public MessageRepository(AubilousTouchDbContext context) : base(context) { }
+        public MessageCenterRepository(AubilousTouchDbContext context) : base(context)
+        {
 
+        }
     }
 }

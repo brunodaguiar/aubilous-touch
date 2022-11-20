@@ -7,8 +7,6 @@ namespace AubilousTouch.Intra.Repositories
 {
     public class MessagesChannelPerEmployeeRepository : RepositoryBase<MessagesChannelPerEmployee>, IMessagesChannelPerEmployeeRepository
     {
-        public MessagesChannelPerEmployeeRepository(AubilousTouchDbContext db) : base(db)
-        {
-        }
+        public MessagesChannelPerEmployeeRepository(AubilousTouchDbContext context) : base(context) { }
     }
 }

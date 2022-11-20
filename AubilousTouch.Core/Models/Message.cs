@@ -6,6 +6,7 @@ namespace AubilousTouch.Core.Models
     {
         public string Subject { get; set; }
         public string Body { get; set; }
-        public IEnumerable<Employee> Employees { get; set; }
+        public string Recipients { get; set; }
     }
+
 }
