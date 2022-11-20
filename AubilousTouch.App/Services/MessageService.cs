@@ -89,5 +89,23 @@ namespace AubilousTouch.App.Services
 
             return await Task.FromResult(sentMessages);
         }
+
+        public async Task SaveInMessageCenterFromFileAsync(IList<MessagesChannelPerEmployee> messagesChannelPerEmployees, int messageId)
+        {
+            foreach(var messagesChannelPerEmployee in messagesChannelPerEmployees)
+            {
+                var messageCenter = new MessageCenter
+                {
+                    MessageId = messageId,
+                    MessagesChannelPerEmployeeId = messagesChannelPerEmployee.Id,
+                    Sent = true,
+                    Received = false,
+                    MessageSentDate = DateTime.Now,
+                    Status = "Sent"
+                };
+
+                await _messageCenterRepository.AddAsync(messageCenter);
+            }            
+        }
     }
 }
