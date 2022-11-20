@@ -35,10 +35,6 @@ namespace AubilousTouch.App.Services
             _reader = reader ?? throw new ArgumentNullException(nameof(reader));
         }
 
-        public async void PublishMessage()
-        {
-            await _bus.Publish(new ExampleMessage());
-        }
 
         public async Task ReadFromBase64FileAsync(string file, int messageId)
         {
