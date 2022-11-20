@@ -1,6 +1,6 @@
 USE [AubilousTouchDB]
 GO
-ALTER TABLE [dbo].[MessagesGroupPerEmployee] DROP CONSTRAINT [FK_MessagesGroupPerEmployee_MessagesGroup]
+ALTER TABLE [dbo].[MessagesGroupPerEmployee] DROP CONSTRAINT [FK_MessagesGroupPerEmployee_MessagesGroup1]
 GO
 ALTER TABLE [dbo].[MessagesGroupPerEmployee] DROP CONSTRAINT [FK_MessagesGroupPerEmployee_Employee]
 GO
@@ -26,35 +26,35 @@ ALTER TABLE [dbo].[MessageCenter] DROP CONSTRAINT [DF_MessageCenter_sent]
 GO
 ALTER TABLE [dbo].[Employee] DROP CONSTRAINT [DF_Employee_isActive]
 GO
-/****** Object:  Table [dbo].[MessagesGroupPerEmployee]    Script Date: 2022-11-19 7:00:27 PM ******/
+/****** Object:  Table [dbo].[MessagesGroupPerEmployee]    Script Date: 2022-11-20 2:49:05 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[MessagesGroupPerEmployee]') AND type in (N'U'))
 DROP TABLE [dbo].[MessagesGroupPerEmployee]
 GO
-/****** Object:  Table [dbo].[MessagesGroup]    Script Date: 2022-11-19 7:00:27 PM ******/
+/****** Object:  Table [dbo].[MessagesGroup]    Script Date: 2022-11-20 2:49:05 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[MessagesGroup]') AND type in (N'U'))
 DROP TABLE [dbo].[MessagesGroup]
 GO
-/****** Object:  Table [dbo].[MessagesChannelPerEmployee]    Script Date: 2022-11-19 7:00:27 PM ******/
+/****** Object:  Table [dbo].[MessagesChannelPerEmployee]    Script Date: 2022-11-20 2:49:05 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[MessagesChannelPerEmployee]') AND type in (N'U'))
 DROP TABLE [dbo].[MessagesChannelPerEmployee]
 GO
-/****** Object:  Table [dbo].[MessagesChannel]    Script Date: 2022-11-19 7:00:27 PM ******/
+/****** Object:  Table [dbo].[MessagesChannel]    Script Date: 2022-11-20 2:49:05 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[MessagesChannel]') AND type in (N'U'))
 DROP TABLE [dbo].[MessagesChannel]
 GO
-/****** Object:  Table [dbo].[MessageCenter]    Script Date: 2022-11-19 7:00:27 PM ******/
+/****** Object:  Table [dbo].[MessageCenter]    Script Date: 2022-11-20 2:49:05 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[MessageCenter]') AND type in (N'U'))
 DROP TABLE [dbo].[MessageCenter]
 GO
-/****** Object:  Table [dbo].[Message]    Script Date: 2022-11-19 7:00:27 PM ******/
+/****** Object:  Table [dbo].[Message]    Script Date: 2022-11-20 2:49:05 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Message]') AND type in (N'U'))
 DROP TABLE [dbo].[Message]
 GO
-/****** Object:  Table [dbo].[Employee]    Script Date: 2022-11-19 7:00:27 PM ******/
+/****** Object:  Table [dbo].[Employee]    Script Date: 2022-11-20 2:49:05 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Employee]') AND type in (N'U'))
 DROP TABLE [dbo].[Employee]
 GO
-/****** Object:  Table [dbo].[Employee]    Script Date: 2022-11-19 7:00:27 PM ******/
+/****** Object:  Table [dbo].[Employee]    Script Date: 2022-11-20 2:49:05 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -80,7 +80,7 @@ CREATE TABLE [dbo].[Employee](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Message]    Script Date: 2022-11-19 7:00:27 PM ******/
+/****** Object:  Table [dbo].[Message]    Script Date: 2022-11-20 2:49:05 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -96,7 +96,7 @@ CREATE TABLE [dbo].[Message](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[MessageCenter]    Script Date: 2022-11-19 7:00:27 PM ******/
+/****** Object:  Table [dbo].[MessageCenter]    Script Date: 2022-11-20 2:49:05 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -115,7 +115,7 @@ CREATE TABLE [dbo].[MessageCenter](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[MessagesChannel]    Script Date: 2022-11-19 7:00:27 PM ******/
+/****** Object:  Table [dbo].[MessagesChannel]    Script Date: 2022-11-20 2:49:05 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -130,7 +130,7 @@ CREATE TABLE [dbo].[MessagesChannel](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[MessagesChannelPerEmployee]    Script Date: 2022-11-19 7:00:27 PM ******/
+/****** Object:  Table [dbo].[MessagesChannelPerEmployee]    Script Date: 2022-11-20 2:49:05 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -149,7 +149,7 @@ CREATE TABLE [dbo].[MessagesChannelPerEmployee](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[MessagesGroup]    Script Date: 2022-11-19 7:00:27 PM ******/
+/****** Object:  Table [dbo].[MessagesGroup]    Script Date: 2022-11-20 2:49:05 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -165,19 +165,19 @@ CREATE TABLE [dbo].[MessagesGroup](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[MessagesGroupPerEmployee]    Script Date: 2022-11-19 7:00:27 PM ******/
+/****** Object:  Table [dbo].[MessagesGroupPerEmployee]    Script Date: 2022-11-20 2:49:05 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[MessagesGroupPerEmployee](
-	[id] [int] NOT NULL,
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[groupid] [int] NULL,
 	[employeeid] [int] NOT NULL,
 	[isActive] [bit] NULL,
- CONSTRAINT [PK_MessagesGroupPerEmployee] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_MessagesGroupPerEmployee_1] PRIMARY KEY CLUSTERED 
 (
-	[id] ASC,
-	[employeeid] ASC
+	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -220,8 +220,8 @@ REFERENCES [dbo].[Employee] ([id])
 GO
 ALTER TABLE [dbo].[MessagesGroupPerEmployee] CHECK CONSTRAINT [FK_MessagesGroupPerEmployee_Employee]
 GO
-ALTER TABLE [dbo].[MessagesGroupPerEmployee]  WITH CHECK ADD  CONSTRAINT [FK_MessagesGroupPerEmployee_MessagesGroup] FOREIGN KEY([id])
+ALTER TABLE [dbo].[MessagesGroupPerEmployee]  WITH CHECK ADD  CONSTRAINT [FK_MessagesGroupPerEmployee_MessagesGroup1] FOREIGN KEY([groupid])
 REFERENCES [dbo].[MessagesGroup] ([id])
 GO
-ALTER TABLE [dbo].[MessagesGroupPerEmployee] CHECK CONSTRAINT [FK_MessagesGroupPerEmployee_MessagesGroup]
+ALTER TABLE [dbo].[MessagesGroupPerEmployee] CHECK CONSTRAINT [FK_MessagesGroupPerEmployee_MessagesGroup1]
 GO
