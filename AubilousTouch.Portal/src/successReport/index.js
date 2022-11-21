@@ -14,9 +14,6 @@ import background from './../../assets/background1.jpg';
 const deviceHeight = Dimensions.get('window').height;
 
 const SuccessReport = ({ navigation }) => {
-  const uri =
-    'https://app.powerbi.com/view?r=eyJrIjoiY2ZjMTY1Y2ItZjk5NC00NmY2LTk2NzEtN2M4ZGY3ZjQ3OGZmIiwidCI6IjFmMjNmYzc5LWEyNjktNDdmYS1iZDQzLTI1MjIyZTllNTc3NCIsImMiOjl9';
-
   return (
     <Fragment>
       {(Platform.OS === 'android' || Platform.OS === 'ios') && (

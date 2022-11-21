@@ -132,7 +132,7 @@ export default function App() {
           <Stack.Screen
             name="SuccessReport"
             component={SuccessReport}
-            options={{
+            options={({ navigation }) => ({
               title: 'Analytics | Power BI',
               headerRight: () => (
                 <HStack mr={Platform.OS === 'web' ? 10 : 0}>
@@ -160,7 +160,7 @@ export default function App() {
                   </Pressable>
                 </HStack>
               ),
-            }}
+            })}
           />
         </Stack.Navigator>
       </NavigationContainer>

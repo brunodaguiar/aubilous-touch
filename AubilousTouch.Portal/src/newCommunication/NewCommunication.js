@@ -34,15 +34,16 @@ const NewCommunication = ({ navigation }) => {
 
   const pickDocument = async () => {
     let result = await DocumentPicker.getDocumentAsync({ type: ['text/csv'] });
-    alert(result.uri);
-    console.log(result.file);
-    console.log(result.uri);
     setAubilousCSV(result);
   };
 
   const communicate = () => {
-    sendNewCommunication({ title: messageTitle, text: messageDescription, file: aubilousCSV.uri });
-    alert("Comunicado enviado!");
+    sendNewCommunication({
+      title: messageTitle,
+      text: messageDescription,
+      file: aubilousCSV.uri,
+    });
+    alert('Comunicado enviado!');
   };
 
   return (
