@@ -103,13 +103,31 @@ const NewCommunication = ({ navigation }) => {
           Baixar modelo CSV
         </Link>
       </Box>
-      <Box
+      <HStack
+        space={2}
         height={'10%'}
         width={deviceWidth * 0.8}
         maxWidth={'95%'}
         alignSelf="center"
         justifyContent={'flex-end'}
       >
+        <Button
+          variant="outline"
+          alignSelf={'flex-end'}
+          color="primary.200"
+          borderColor={'primary.200'}
+          endIcon={
+            <Icon
+              size={'md'}
+              color="primary.200"
+              name="disabled-by-default"
+              as={MaterialIcons}
+            />
+          }
+          onPress={() => navigation.navigate('Communications')}
+        >
+          Cancelar
+        </Button>
         <Button
           alignSelf={'flex-end'}
           bgColor="primary.200"
@@ -120,7 +138,7 @@ const NewCommunication = ({ navigation }) => {
         >
           Enviar Comunicado
         </Button>
-      </Box>
+      </HStack>
     </Box>
   );
 };

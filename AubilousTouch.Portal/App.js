@@ -12,6 +12,7 @@ import Login from './src/login/Login';
 import NewCommunication from './src/newCommunication/NewCommunication';
 import Communications from './src/communications/Communications';
 import { MaterialIcons } from '@expo/vector-icons';
+import SuccessReport from './src/successReport';
 
 const Stack = createNativeStackNavigator();
 
@@ -54,14 +55,14 @@ export default function App() {
             animationDuration: 2,
           }}
         >
-          {/* <Stack.Screen
+          <Stack.Screen
             name="Login"
             component={Login}
             options={{
               headerShown: false,
               title: 'Login',
             }}
-          /> */}
+          />
           <Stack.Screen
             name="Communications"
             component={Communications}
@@ -71,7 +72,10 @@ export default function App() {
               title: 'Comunicados',
               headerRight: () => (
                 <HStack mr={Platform.OS === 'web' ? 10 : 0}>
-                  <Pressable mr={5}>
+                  <Pressable
+                    mr={5}
+                    onPress={() => navigation.navigate('SuccessReport')}
+                  >
                     <HStack alignItems={'center'}>
                       {Platform.OS === 'web' && (
                         <Text
@@ -125,13 +129,39 @@ export default function App() {
               title: 'Enviar Novo Comunicado',
             }}
           />
-          {/* <Stack.Screen
-            name="CommunicationSent"
-            component={CommunicationSent}
+          <Stack.Screen
+            name="SuccessReport"
+            component={SuccessReport}
             options={{
-              title: 'Comunicação Enviada',
+              title: 'Analytics | Power BI',
+              headerRight: () => (
+                <HStack mr={Platform.OS === 'web' ? 10 : 0}>
+                  <Pressable
+                    borderRadius={'xl'}
+                    onPress={() => navigation.navigate('Communications')}
+                  >
+                    <HStack alignItems={'center'}>
+                      {Platform.OS === 'web' && (
+                        <Text
+                          justifyContent="center"
+                          mr="5"
+                          style={{ fontWeight: 500 }}
+                        >
+                          Comunicados
+                        </Text>
+                      )}
+                      <Icon
+                        size="xl"
+                        color="secondary.200"
+                        name={'view-list'}
+                        as={MaterialIcons}
+                      />
+                    </HStack>
+                  </Pressable>
+                </HStack>
+              ),
             }}
-          /> */}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
