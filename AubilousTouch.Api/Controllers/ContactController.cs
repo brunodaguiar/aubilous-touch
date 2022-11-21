@@ -1,4 +1,5 @@
-﻿using AubilousTouch.Core.Interfaces.Services;
+﻿using AubilousTouch.Core.Dto;
+using AubilousTouch.Core.Interfaces.Services;
 using AubilousTouch.Core.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -53,19 +54,26 @@ namespace AubilousTouch.Api.Controllers
         /// <param name="file">Arquivo em Base64</param>
         /// <returns></returns>
         [HttpPost("send-communication")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Employee>))]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
-        public async Task<IActionResult> SendCommunication(string title, string text, string file)
+        public async Task<IActionResult> SendCommunication([FromBody] SendCommunicationDto sendCommunicationDto)
         {
-            if(string.IsNullOrEmpty(title) || string.IsNullOrEmpty(text) || file == null || file.Length == 0)
+            if(string.IsNullOrEmpty(sendCommunicationDto.Title) 
+                || string.IsNullOrEmpty(sendCommunicationDto.Text) 
+                || sendCommunicationDto.File == null 
+                || sendCommunicationDto.File.Length == 0)
                 return BadRequest();
 
-            Message message = await _messageService.SaveMessageAsync(title, text);
+            Message message = await _messageService.SaveMessageAsync(sendCommunicationDto.Title, sendCommunicationDto.Text);
 
             try
             {
+                string base64text = sendCommunicationDto.File;
+                
+                if (sendCommunicationDto.File.Split(',')[0].IndexOf("base64") >= 0)
+                    base64text = sendCommunicationDto.File.Split(',')[1];                
 
-                await _employeeService.ReadFromBase64FileAsync(file, message.Id);
+                await _employeeService.ReadFromBase64FileAsync(base64text, message.Id);
             } 
             catch (Exception e)
             {
