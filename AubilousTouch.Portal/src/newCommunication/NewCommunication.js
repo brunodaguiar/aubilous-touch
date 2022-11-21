@@ -22,6 +22,7 @@ import {
 } from 'native-base';
 import icon from './../../assets/favicon.png';
 import { EvilIcons, MaterialIcons } from '@expo/vector-icons';
+import { sendNewCommunication } from './NewCommunication.service';
 
 const deviceHeigth = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
@@ -40,7 +41,8 @@ const NewCommunication = ({ navigation }) => {
   };
 
   const communicate = () => {
-    navigation.navigate('CommunicationSent');
+    sendNewCommunication({ title: messageTitle, text: messageDescription, file: aubilousCSV.uri });
+    alert("Comunicado enviado!");
   };
 
   return (

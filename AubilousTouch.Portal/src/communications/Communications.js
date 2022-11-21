@@ -30,12 +30,12 @@ import { getCommunications } from './Communications.service';
 const deviceWidth = Dimensions.get('window').width;
 
 const Communications = () => {
-  // const [lastCommunications, setLastCommunications] = useState([]);
+   const [lastCommunications, setLastCommunications] = useState([]);
 
-  // useEffect(() => {
-  //   const result = getCommunications(setLastCommunications);
-  // }, []);
-
+   useEffect(() => {
+     const result = getCommunications(setLastCommunications);
+   }, []);
+/*
   const lastCommunications = [
     {
       message: {
@@ -78,7 +78,7 @@ const Communications = () => {
       },
     },
   ];
-
+*/
   return (
     <View style={styles.container}>
       <FlatList
@@ -128,7 +128,7 @@ const Communications = () => {
                   height={'60%'}
                 >
                   <Text mx={1} color="white" fontSize="xl">
-                    {item.deliveredPercentage || 0}%{' '}
+                    {lastCommunications.statistics.find((param) => param.messageId === item.message.id).successRate }%{' '}
                     {Platform.OS === 'web' && 'entregue'}
                   </Text>
                 </Box>
@@ -136,7 +136,7 @@ const Communications = () => {
             </VStack>
           </Box>
         )}
-        data={lastCommunications}
+        data={lastCommunications.messages}
         maxWidth={'97%'}
       />
     </View>

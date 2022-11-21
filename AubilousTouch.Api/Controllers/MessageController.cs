@@ -26,7 +26,8 @@ namespace AubilousTouch.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetSentMssages()
         {
-            return Ok(await _service.GetSentMessagesAsync());
+            var result = await _service.GetSentMessagesAsync();
+            return Ok(result);
         }
     }
 }

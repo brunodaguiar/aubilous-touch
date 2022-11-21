@@ -93,15 +93,15 @@ namespace AubilousTouch.App.Services
         {        
             var channelPerEmployees = new List<MessagesChannelPerEmployee>();
 
-            if(item.Whatsapp != null) channelPerEmployees.Add(await BuildChannelPerEmployee(item.AubilousId, item.Whatsapp, "Whatsapp"));
+            if(item.Whatsapp != null && item.Whatsapp != "X") channelPerEmployees.Add(await BuildChannelPerEmployee(item.AubilousId, item.Whatsapp, "Whatsapp"));
 
-            if (item.SMS != null) channelPerEmployees.Add(await BuildChannelPerEmployee(item.AubilousId, item.SMS, "SMS"));
+            if (item.SMS != null && item.SMS != "X") channelPerEmployees.Add(await BuildChannelPerEmployee(item.AubilousId, item.SMS, "SMS"));
 
-            if (item.Email != null) channelPerEmployees.Add(await BuildChannelPerEmployee(item.AubilousId, item.Email, "Email"));
+            if (item.Email != null && item.Email != "X") channelPerEmployees.Add(await BuildChannelPerEmployee(item.AubilousId, item.Email, "Email"));
 
-            if (item.Telegram != null) channelPerEmployees.Add(await BuildChannelPerEmployee(item.AubilousId, item.Telegram, "Telegram"));
+            if (item.Telegram != null && item.Telegram != "X") channelPerEmployees.Add(await BuildChannelPerEmployee(item.AubilousId, item.Telegram, "Telegram"));
 
-            if (item.Slack != null) channelPerEmployees.Add(await BuildChannelPerEmployee(item.AubilousId, item.Slack, "Slack"));
+            if (item.Slack != null && item.Slack != "X") channelPerEmployees.Add(await BuildChannelPerEmployee(item.AubilousId, item.Slack, "Slack"));
 
             //if (item.Icq)...
             //if (item.CaixaPostal)...
